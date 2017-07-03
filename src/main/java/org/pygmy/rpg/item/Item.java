@@ -17,5 +17,9 @@ public abstract class Item {
     public Item useTo(Character target) {
         return this;
     }
-        
+    
+    public boolean isUsedup() {
+        return false;
+    }
+    
 }

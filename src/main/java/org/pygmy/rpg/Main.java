@@ -30,9 +30,9 @@ public class Main {
         // 武器と防具を装備
         player.equip(IronSword.create());
         player.equip(IronArmor.create());
-        
+
         enemy.equip(SteelAxe.create());
-        
+
         // 攻撃（装備後）
         System.out.println("攻撃（装備後）");
         dumpPointOfLife(player);
@@ -46,16 +46,25 @@ public class Main {
         Item item = player.takeItem(Portion.class);
         dumpCountOfItems(player);
         // 2) 使う
-        System.out.println("アイテム：使う");
+        System.out.println("アイテム：使って…");
         dumpPointOfLife(player);
         item.useTo(player);
         dumpPointOfLife(player);
+        // 3)使い切った？
+        if (item.isUsedup()) {
+            System.out.println("アイテム：捨てる");
+        } else {
+            System.out.println("アイテム：戻す");
+            dumpCountOfItems(player);
+            player.giveItem(item);
+            dumpCountOfItems(player);
+        }
     }
 
     private static void dumpPointOfLife(Character character) {
         System.out.println(character.getName() + " -> Point of Life = " + character.getPointOfLife());
     }
-    
+
     private static void dumpCountOfItems(Character character) {
         System.out.println(character.getName() + " -> Count of Items = " + character.getCountOfItems());
     }

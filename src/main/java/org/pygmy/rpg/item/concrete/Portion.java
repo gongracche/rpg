@@ -5,8 +5,11 @@ import org.pygmy.rpg.item.Item;
 
 public class Portion extends Item {
 
+    int quantity;
+    
     private Portion(String name) {
         super(name);
+        this.quantity = 30;
     }
     
     public static Portion create() {
@@ -15,8 +18,15 @@ public class Portion extends Item {
 
     @Override
     public Item useTo(Character target) {
-       target.giveLife(30);
+       target.giveLife(this.quantity);
+       this.quantity -= this.quantity;
        return this;
     }
 
+    @Override
+    public boolean isUsedup() {
+        return this.quantity <= 0;
+    }
+
+    
 }
